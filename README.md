@@ -1,8 +1,1 @@
-# Advanced Topics Canvas Game
-
-This game will be implemented in the following way:
-- two planes flying with full wasd and rotation abilities
-- ability to fire at each other
-- and ability to self destruct
-
-The background will be blue sunny skies.
+https://docs.google.com/document/d/1pzPHulG45_UxZxP3qs7eRpkDnKAy0SYfJktJ1Tzliso/edit

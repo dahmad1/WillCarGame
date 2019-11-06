@@ -3,26 +3,18 @@
  *    keyboard control
  *
  */
-function handleShipAnimation() {
+function handleCarAnimation() {
   if (CONTROLS.ship.forward) {
-    var radians = (Math.PI / 180) * CAR.rotation,
-        cos = Math.cos(radians),
-        sin = Math.sin(radians);
-    CAR.x += CAR.speed * sin;
-    CAR.y +=  CAR.speed * cos;
+    CAR.y +=  CAR.speed;
   }
   if (CONTROLS.ship.backward) {
-    var radians = (Math.PI / 180) * CAR.rotation,
-        cos = Math.cos(radians),
-        sin = Math.sin(radians);
-    CAR.x -= CAR.speed * sin;
-    CAR.y -=  CAR.speed * cos;
+    CAR.y -=  CAR.speed;
   }
-  if (CONTROLS.ship.rotateClockwise) {
-    CAR.rotation -= 4;
+  if (CONTROLS.ship.right) {
+    CAR.x-= 4;
   }
-  if (CONTROLS.ship.rotateCounterClockwise) {
-    CAR.rotation += 4;
+  if (CONTROLS.ship.left) {
+    CAR.x += 4;
   }
 
   // Check if asteroid is leaving the boundary, if so, switch sides
@@ -37,30 +29,19 @@ function handleShipAnimation() {
   }
 }
 
-function RenderNewObject(context) {
-  context.fillRect(NEW_OBJECT.x, NEW_OBJECT.y,50, 50);
-}
-
-function HandleNewObjectMovement() {
-  NEW_OBJECT.x += 1;
-  NEW_OBJECT.y += 0;
-}
-
 function runGame() {
   var canvas = document.getElementById('mainCanvas');
   var context = canvas.getContext('2d');
   if (GAME.started) {
 
     // 1 - Reposition the objects
-    handleShipAnimation();
-    HandleNewObjectMovement();
+    handleCarAnimation();
 
     // 2 - Clear the CANVAS
     context.clearRect(0, 0, 600, 300);
 
     // 3 - Draw new items
     RenderCar(context);
-    RenderNewObject(context);
 
   } else {
     context.font = "30px Arial";

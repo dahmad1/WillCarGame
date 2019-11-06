@@ -5,35 +5,35 @@
  */
 function handleShipAnimation() {
   if (CONTROLS.ship.forward) {
-    var radians = (Math.PI / 180) * SPACE_SHIP.rotation,
+    var radians = (Math.PI / 180) * CAR.rotation,
         cos = Math.cos(radians),
         sin = Math.sin(radians);
-    SPACE_SHIP.x += SPACE_SHIP.speed * sin;
-    SPACE_SHIP.y +=  SPACE_SHIP.speed * cos;
+    CAR.x += CAR.speed * sin;
+    CAR.y +=  CAR.speed * cos;
   }
   if (CONTROLS.ship.backward) {
-    var radians = (Math.PI / 180) * SPACE_SHIP.rotation,
+    var radians = (Math.PI / 180) * CAR.rotation,
         cos = Math.cos(radians),
         sin = Math.sin(radians);
-    SPACE_SHIP.x -= SPACE_SHIP.speed * sin;
-    SPACE_SHIP.y -=  SPACE_SHIP.speed * cos;
+    CAR.x -= CAR.speed * sin;
+    CAR.y -=  CAR.speed * cos;
   }
   if (CONTROLS.ship.rotateClockwise) {
-    SPACE_SHIP.rotation -= 4;
+    CAR.rotation -= 4;
   }
   if (CONTROLS.ship.rotateCounterClockwise) {
-    SPACE_SHIP.rotation += 4;
+    CAR.rotation += 4;
   }
 
   // Check if asteroid is leaving the boundary, if so, switch sides
-  if (SPACE_SHIP.x > GAME.canvas.width) {
-    SPACE_SHIP.x = 0;
-  } else if (SPACE_SHIP.x < 0) {
-    SPACE_SHIP.x = 600;
-  } else if (SPACE_SHIP.y > GAME.canvas.height) {
-    SPACE_SHIP.y = 0;
-  } else if (SPACE_SHIP.y < 0) {
-    SPACE_SHIP.y = 300;
+  if (CAR.x > GAME.canvas.width) {
+    CAR.x = 0;
+  } else if (CAR.x < 0) {
+    CAR.x = 600;
+  } else if (CAR.y > GAME.canvas.height) {
+    CAR.y = 0;
+  } else if (CAR.y < 0) {
+    CAR.y = 300;
   }
 }
 
@@ -59,7 +59,7 @@ function runGame() {
     context.clearRect(0, 0, 600, 300);
 
     // 3 - Draw new items
-    RenderSpaceship(context);
+    RenderCar(context);
     RenderNewObject(context);
 
   } else {

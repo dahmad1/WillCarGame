@@ -4,7 +4,7 @@ function InitializeCar(){
   context.scale(1,1);
   CAR = {
     x : 300,
-    y : 150,
+    y : 300,
     latest : {
         x : CAR.x,
         y : CAR.y,
@@ -18,11 +18,12 @@ function InitializeCar(){
   if (!CAR.initialized) {
     return;
   }
-  context.fillRect(CAR.x, CAR.y, 50, 50);
   context.moveTo(CAR.x,CAR.y);
   CAR.latest.x = CAR.x;
   CAR.latest.y = CAR.y;
   context.beginPath();
+  context.fillRect(CAR.x, CAR.y, 50, 50);
+  context.stroke();
 
 }
 }

@@ -23,7 +23,7 @@ function InitializeCar(){
     CAR.latest.y = CAR.y;
     context.beginPath();
     context.rect(CAR.x, CAR.y, 50, 50);
-    context.fillStyle = "#0095DD";
+    context.fillStyle = "red";
     context.fill();
     context.closePath();
 

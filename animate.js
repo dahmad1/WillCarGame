@@ -1,20 +1,20 @@
 /**
- *  handleShipAnimation moves the ship based on its direction and
+ *  handlecarAnimation moves the car based on its direction and
  *    keyboard control
  *
  */
 function handleCarAnimation() {
-  if (CONTROLS.ship.forward) {
-    CAR.y +=  CAR.speed;
-  }
-  if (CONTROLS.ship.backward) {
+  if (CONTROLS.car.forward) {
     CAR.y -=  CAR.speed;
   }
-  if (CONTROLS.ship.right) {
-    CAR.x-= 4;
+  if (CONTROLS.car.backward) {
+    CAR.y +=  CAR.speed;
   }
-  if (CONTROLS.ship.left) {
+  if (CONTROLS.car.right) {
     CAR.x += 4;
+  }
+  if (CONTROLS.car.left) {
+    CAR.x -= 4;
   }
 
   // Check if asteroid is leaving the boundary, if so, switch sides
@@ -41,7 +41,7 @@ function runGame() {
     context.clearRect(0, 0, 600, 300);
 
     // 3 - Draw new items
-    RenderCar(context);
+    renderCar(context);
 
   } else {
     context.font = "30px Arial";

@@ -18,14 +18,14 @@ function handleCarAnimation() {
   }
 
   // Check if asteroid is leaving the boundary, if so, switch sides
-  if (CAR.x > GAME.canvas.width) {
-    CAR.x = 0;
+  if (CAR.x > GAME.canvas.width-50) {
+    CAR.x = GAME.canvas.width-50;
   } else if (CAR.x < 0) {
-    CAR.x = 600;
-  } else if (CAR.y > GAME.canvas.height) {
-    CAR.y = 0;
+    CAR.x = 0;
+  } else if (CAR.y > GAME.canvas.height-50) {
+    CAR.y = GAME.canvas.height-50;
   } else if (CAR.y < 0) {
-    CAR.y = 300;
+    CAR.y = 0;
   }
 }
 

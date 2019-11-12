@@ -22,7 +22,8 @@ function handleCarAnimation() {
     CAR.x = GAME.canvas.width-50;
   } else if (CAR.x < 0) {
     CAR.x = 0;
-  } else if (CAR.y > GAME.canvas.height-50) {
+  }
+  if (CAR.y > GAME.canvas.height-50) {
     CAR.y = GAME.canvas.height-50;
   } else if (CAR.y < 0) {
     CAR.y = 0;

@@ -4,29 +4,50 @@
  *
  */
 function handleCarAnimation() {
+
   if (CONTROLS.car.forward) {
-    CAR.y -=  CAR.speed;
+    if (CONTROLS.fire.active) {
+      CAR.y -= 10;
+    }else
+    {
+      CAR.y -=  CAR.speed;
+    }
   }
   if (CONTROLS.car.backward) {
-    CAR.y +=  CAR.speed;
+    if (CONTROLS.fire.active) {
+      CAR.y += 10;
+    }else
+    {
+      CAR.y +=  CAR.speed;
+    }
   }
   if (CONTROLS.car.right) {
-    CAR.x += 4;
+    if (CONTROLS.fire.active) {
+      CAR.x += 10;
+    }else
+    {
+      CAR.x +=  CAR.speed;
+    }
   }
   if (CONTROLS.car.left) {
-    CAR.x -= 4;
+    if (CONTROLS.fire.active) {
+      CAR.x -= 10;
+    }else
+    {
+      CAR.x -=  CAR.speed;
+    }
   }
 
   // Check if asteroid is leaving the boundary, if so, switch sides
-  if (CAR.x > GAME.canvas.width-50) {
-    CAR.x = GAME.canvas.width-50;
-  } else if (CAR.x < 0) {
+  if (CAR.x > GAME.canvas.width) {
     CAR.x = 0;
+  } else if (CAR.x < 0) {
+    CAR.x = GAME.canvas.width;
   }
-  if (CAR.y > GAME.canvas.height-50) {
-    CAR.y = GAME.canvas.height-50;
-  } else if (CAR.y < 0) {
+  if (CAR.y > GAME.canvas.height) {
     CAR.y = 0;
+  } else if (CAR.y < 0) {
+    CAR.y = GAME.canvas.height;
   }
 }
 

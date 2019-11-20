@@ -8,7 +8,8 @@ var CONTROLS = {
     forward : false,
     back : false,
     right : false,
-    left : false
+    left : false,
+    brake: false
   },
   fire : {
     active : false,
@@ -31,8 +32,11 @@ document.addEventListener('keydown', function(event) {
     case "ArrowRight":
       CONTROLS.car.right = true;
       break;
-    case " ":
+    case "z":
       CONTROLS.fire.active = true;
+      break;
+    case " ":
+      CONTROLS.car.brake = true;
       break;
     default:
       break;
@@ -54,8 +58,11 @@ document.addEventListener('keyup', function(event) {
     case "ArrowRight":
       CONTROLS.car.right = false;
       break;
-    case " ":
+    case "z":
       CONTROLS.fire.active = false;
+      break;
+    case " ":
+      CONTROLS.car.brake = false;
       break;
     default:
       break;

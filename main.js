@@ -1,3 +1,5 @@
 function Start(){
+  
   InitializeCar();
+  InitializeRoad();
 }

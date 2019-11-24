@@ -1,91 +1,142 @@
-/**
- *  handlecarAnimation moves the car based on its direction and
- *    keyboard control
- *
- */
-function handleCarAnimation() {
+var introTimer=300;
+function playIntro(context) {
+  context.fillStyle='grey';
+  context.fillRect(0,0,GAME.canvas.width,GAME.canvas.height);
+  context.fillStyle='white';
+  context.fillText("WATCH OUT FOR", 180, 30);
+  context.drawImage(obsOrangeCar, 180, 100,90,80);
+  context.drawImage(obsMine, 350, 130,80,32);
+  context.fillText("CARS", 182, 220);
+  context.fillText("MINES", 345, 220);
+  introTimer--;
+  if(introTimer==0) {GAME.level++;
+  startTime=new Date();}
+}
 
-  if (CONTROLS.car.forward) {
-    if (CONTROLS.fire.active) {
-      CAR.y -= 10;
-    }else
-    {
-      CAR.y -=  CAR.speed;
-    }
-  }
-  if (CONTROLS.car.backward) {
-    if (CONTROLS.fire.active) {
-      CAR.y += 10;
-    }else
-    {
-      CAR.y +=  CAR.speed;
-    }
-  }
-  if (CONTROLS.car.right) {
-    if (CONTROLS.fire.active) {
-      CAR.x += 10;
-    }else
-    {
-      CAR.x +=  CAR.speed;
-    }
-  }
-  if (CONTROLS.car.left) {
-    if (CONTROLS.fire.active) {
-      CAR.x -= 10;
-    }else
-    {
-      CAR.x -=  CAR.speed;
-    }
-  }
 
-  // Check if asteroid is leaving the boundary, if so, switch sides
-  if (CAR.x > GAME.canvas.width) {
-    CAR.x = 0;
-  } else if (CAR.x < 0) {
-    CAR.x = GAME.canvas.width;
-  }
-  if (CAR.y > GAME.canvas.height) {
-    CAR.y = 0;
-  } else if (CAR.y < 0) {
-    CAR.y = GAME.canvas.height;
+
+var startTime=new Date();
+var timer="",tempTime=new Date();
+function displayTimer(context) {
+  tempTime=new Date();
+  timer=Math.floor((tempTime-startTime)/100)/10;
+  context.fillStyle='white';
+  if(timer%1!=0){context.fillText(Math.floor(10*(60-timer))/10, 10,30);}
+  else{context.fillText(60-timer+".0", 10,30);}
+}
+
+function displayProgress(context) {
+  context.fillStyle='white';
+  context.fillRect(GAME.canvas.width/2-100, 10, 200*(CAR.distanceTraveled/GAME.distanceGoal), 20);
+  context.strokeStyle='black';
+  context.strokeRect(GAME.canvas.width/2-100, 10, 200, 20);
+
+}
+
+var mineTimer=100;
+function setLevelSections(context) {
+  if(GAME.level==1) {
+    if(CAR.distanceTraveled>32000) {
+      GAME.obsType="car";
+    }
+    else if(CAR.distanceTraveled>20000) {
+      GAME.obsType="mine";
+      if(mineTimer>0) {
+        context.fillStyle='black';
+        context.fillText("WARNING: MINES", 190, 130);
+        mineTimer--;
+        if(GAME.obstacles.length>0) {GAME.obstacles.pop();}
+      }
+    }
+
   }
 }
 
-function renderRoad(context){
-  context.fillStyle = "black";
-  context.fillRect(0,0, GAME.canvas.width, GAME.canvas.height);
-}
-function renderRoadLines(context){
-  context.lineWidth = 10;
-  context.strokeStyle = "yellow";
-  context.lineCap = "square";
-  context.setLineDash([10,50]);
-  context.beginPath();
-  context.rect(10, 140, GAME.canvas.width, 0);
-  context.stroke();
+function setLevelConditions() {
+
 }
 
+function checkLevelConditions() {
+  if(CAR.distanceTraveled>GAME.distanceGoal) {
+    GAME.started=false;
+    return;
+  }
+  if(CAR.collateralDamage>=50) {
+    GAME.started=false;
+    return;
+  }
+  if(timer<0) {
+    GAME.started=false;
+    return;
+  }
+}
+
+var levelEndTimer = 100;
+function runLevelEnd(context) {
+  if(CAR.collateralDamage<50) {
+    context.fillStyle='white';
+    context.font = "30px Arial";
+    context.fillText("You win!", 240, 130);
+  }
+  else if(timer<0) {
+    context.fillStyle='white';
+    context.font = "30px Arial";
+    context.fillText("Out of time...", 170, 130);
+  }
+  else {
+    context.fillStyle='white';
+    context.font = "30px Arial";
+    context.fillText("Game Over      Level " + GAME.level, 155, 200);
+  }
+}
 
 function runGame() {
   var canvas = document.getElementById('mainCanvas');
   var context = canvas.getContext('2d');
+  context.font = "30px Arial";
   if (GAME.started) {
+    if(GAME.transitionLevel) {
 
-    // 1 - Reposition the objects
-    handleCarAnimation();
+    }
+    else if(GAME.level==0) {
+      playIntro(context);
+    }
+    else if(GAME.level==1) {
+      GAME.time=new Date()-startTime;
+      // 1 - Reposition the objects
+      handleCarAnimation();
+      animateRoadLines();
+      animateObstacles();
 
-    // 2 - Clear the CANVAS
-    context.clearRect(0, 0, 600, 300);
+      checkObstacleCollision();
 
-    // 3 - Draw new items
-    renderRoad(context);
-    renderRoadLines(context);
-    renderCar(context);
+      // 2 - Clear the CANVAS
+      context.clearRect(0, 0, 600, 300);
+
+
+
+      // 3 - Draw new items
+      renderRoad(context);
+      renderRoadLines(context);
+      renderObstacles(context);
+      renderCar(context);
+
+
+      displayTimer(context);
+      displayCollateralDamage(context);
+      setLevelSections(context);
+      displayProgress(context);
+
+
+      checkLevelConditions();
+    }
+    else {
+
+    }
 
 
   } else {
-    context.font = "30px Arial";
-    context.fillText("Game Over      Level " + GAME.level, 135, 200);
+    runLevelEnd(context);
   }
   window.requestAnimationFrame(runGame);
 }

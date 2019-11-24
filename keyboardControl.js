@@ -9,7 +9,8 @@ var CONTROLS = {
     back : false,
     right : false,
     left : false,
-    brake: false
+    brake: false,
+    nitro : false
   },
   fire : {
     active : false,

@@ -65,7 +65,7 @@ function checkLevelConditions() {
     GAME.started=false;
     return;
   }
-  if(timer<0) {
+  if(timer>=60) {
     GAME.started=false;
     return;
   }
@@ -78,7 +78,7 @@ function runLevelEnd(context) {
     context.font = "30px Arial";
     context.fillText("You win!", 240, 130);
   }
-  else if(timer<0) {
+  else if(CAR.distanceTraveled<GAME.distanceGoal) {
     context.fillStyle='white';
     context.font = "30px Arial";
     context.fillText("Out of time...", 170, 130);

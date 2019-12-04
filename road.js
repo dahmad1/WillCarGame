@@ -32,7 +32,7 @@ function animateRoadLines() {
 }
 
 function renderRoadLines(context) {
-  context.fillStyle='yellow';
+  context.fillStyle='white';
   for(var i = 0; i < ART.lines.length; i++) {
     context.fillRect(ART.lines[i].x, ART.lines[i].y,40, 12);
     if(ART.lines[i].x+40<0) {

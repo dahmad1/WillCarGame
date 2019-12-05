@@ -59,8 +59,8 @@ function checkObstacleCollision() {
         &&GAME.obstacles[i].x+22.5>CAR.x-27.5
         &&GAME.obstacles[i].y-20<CAR.y+22.5
         &&GAME.obstacles[i].y+20>CAR.y-22.5) {
-          CAR.collateralDamage+=10;
-          setCollateralDamage();
+          CAR.Damage+=10;
+          setDamage();
           GAME.obstacles.splice(i,1);
           i--;
         }
@@ -70,8 +70,8 @@ function checkObstacleCollision() {
         &&GAME.obstacles[i].x+17>CAR.x-27.5
         &&GAME.obstacles[i].y-8<CAR.y+22.5
         &&GAME.obstacles[i].y+8>CAR.y-22.5) {
-          CAR.collateralDamage+=15;
-          setCollateralDamage();
+          CAR.Damage+=15;
+          setDamage();
           GAME.obstacles.splice(i,1);
           i--;
         }

@@ -61,7 +61,7 @@ function checkLevelConditions() {
     GAME.started=false;
     return;
   }
-  if(CAR.collateralDamage>=50) {
+  if(CAR.Damage>=50) {
     GAME.started=false;
     return;
   }
@@ -73,12 +73,12 @@ function checkLevelConditions() {
 
 var levelEndTimer = 100;
 function runLevelEnd(context) {
-  if(CAR.collateralDamage<50 && CAR.distanceTraveled>=GAME.distanceGoal) {
+  if(CAR.Damage<50 && CAR.distanceTraveled>=GAME.distanceGoal) {
     context.fillStyle='white';
     context.font = "30px Arial";
     context.fillText("You win!", 240, 130);
   }
-  else if(CAR.distanceTraveled<GAME.distanceGoal) {
+  else if(CAR.distanceTraveled<GAME.distanceGoal && CAR.Damage<50) {
     context.fillStyle='white';
     context.font = "30px Arial";
     context.fillText("Out of time...", 170, 130);
@@ -123,7 +123,7 @@ function runGame() {
 
 
       displayTimer(context);
-      displayCollateralDamage(context);
+      displayDamage(context);
       setLevelSections(context);
       displayProgress(context);
 

@@ -19,7 +19,7 @@ function InitializeCar(){
     speedY : 0,
     MAX_SPEED_Y : 2,
     distanceTraveled : 0,
-    collateralDamage : 0
+    Damage : 0
   }
 }
 
@@ -109,12 +109,12 @@ function renderCar(context) {
     context.drawImage(redCar, CAR.x-27.5, CAR.y-22.5, 55, 45);
 }
 
-function displayCollateralDamage(context) {
+function displayDamage(context) {
   context.fillStyle='white';
-  context.fillText("Collateral Damage: " +CAR.collateralDamage+"/50", 10, GAME.canvas.height-10);
+  context.fillText("Collateral Damage: " +CAR.Damage+"/50", 10, GAME.canvas.height-10);
 }
 
-function setCollateralDamage() {
+function setDamage() {
   CAR.MAX_SPEED_X=0.9*CAR.MAX_SPEED_X;
   CAR.MAX_SPEED_Y=1.2*CAR.MAX_SPEED_Y;
   ART.MAX_LINESPEED=0.9*ART.MAX_LINESPEED;

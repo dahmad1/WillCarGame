@@ -73,7 +73,7 @@ function checkLevelConditions() {
 
 var levelEndTimer = 100;
 function runLevelEnd(context) {
-  if(CAR.collateralDamage<50) {
+  if(CAR.collateralDamage<50 && CAR.distanceTraveled>=GAME.distanceGoal) {
     context.fillStyle='white';
     context.font = "30px Arial";
     context.fillText("You win!", 240, 130);

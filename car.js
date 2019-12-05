@@ -111,7 +111,7 @@ function renderCar(context) {
 
 function displayDamage(context) {
   context.fillStyle='white';
-  context.fillText("Collateral Damage: " +CAR.Damage+"/50", 10, GAME.canvas.height-10);
+  context.fillText("Damage: " +CAR.Damage+"/50", 10, GAME.canvas.height-10);
 }
 
 function setDamage() {

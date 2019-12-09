@@ -1,4 +1,4 @@
-var introTimer=300;
+var introTimer=75;
 function playIntro(context) {
   context.fillStyle='grey';
   context.fillRect(0,0,GAME.canvas.width,GAME.canvas.height);
@@ -12,8 +12,6 @@ function playIntro(context) {
   if(introTimer==0) {GAME.level++;
   startTime=new Date();}
 }
-
-
 
 var startTime=new Date();
 var timer="",tempTime=new Date();

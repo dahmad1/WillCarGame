@@ -5,22 +5,26 @@
 
 var CONTROLS = {
   car : {
-    forward : false,
-    back : false,
+    up : false,
+    down : false,
     right : false,
     left : false,
     brake: false,
-    nitro : false
+    nitro : false,
+    accelerate: false
   }
 };
 
 document.addEventListener('keydown', function(event) {
   switch (event.key) {
+    case "a":
+      CONTROLS.car.accelerate = true;
+      break;
     case "ArrowUp":
-      CONTROLS.car.forward = true;
+      CONTROLS.car.up = true;
       break;
     case "ArrowDown":
-      CONTROLS.car.backward = true;
+      CONTROLS.car.down = true;
       break;
     case "ArrowLeft":
       CONTROLS.car.left = true;
@@ -42,11 +46,14 @@ document.addEventListener('keydown', function(event) {
 
 document.addEventListener('keyup', function(event) {
   switch (event.key) {
+    case "a":
+      CONTROLS.car.accelerate = false;
+      break;
     case "ArrowUp":
-      CONTROLS.car.forward = false;
+      CONTROLS.car.up = false;
       break;
     case "ArrowDown":
-      CONTROLS.car.backward = false;
+      CONTROLS.car.down = false;
       break;
     case "ArrowLeft":
       CONTROLS.car.left = false;

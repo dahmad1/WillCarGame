@@ -53,8 +53,8 @@ function handleCarAnimation() {
       CAR.x += 10;
     }else
     {
-      if(CAR.speedX<CAR.MAX_SPEED_X){CAR.speedX +=  0.05;}
-      if(ART.linespeed<ART.MAX_LINESPEED){ART.linespeed +=  0.05;}
+      if(CAR.speedX<CAR.MAX_SPEED_X){CAR.speedX +=  .05;}
+      if(ART.linespeed<ART.MAX_LINESPEED){ART.linespeed +=  .05;}
     }
   }
   else if (CONTROLS.car.left) {

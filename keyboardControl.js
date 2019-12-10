@@ -44,7 +44,6 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-
 document.addEventListener('keyup', function(event) {
   switch (event.key) {
     case "ArrowUp":

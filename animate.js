@@ -1,19 +1,33 @@
 var introTimer=300;
+var winTime = 180;
 function playIntro(context) {
+  CAR.speedX=0;
+  CAR.speedY=0;
   context.fillStyle='grey';
   context.fillRect(0,0,GAME.canvas.width,GAME.canvas.height);
   context.fillStyle='white';
-  context.fillText("WATCH OUT FOR", 180, 30);
-  context.drawImage(obsOrangeCar, 180, 100,90,80);
-  context.drawImage(obsMine, 350, 130,80,32);
-  context.fillText("CARS", 182, 220);
-  context.fillText("MINES", 345, 220);
+  context.fillText("LEVEL " + (GAME.level +1), 255, 50);
+  context.fillText("WATCH OUT FOR", 180, 110);
+  context.drawImage(obsOrangeCar, 180, 140,90,80);
+  context.drawImage(obsMine, 350, 170,80,32);
+  context.fillText("CARS", 182, 260);
+  context.fillText("MINES", 345, 260);
   introTimer--;
-  if(introTimer==0) {GAME.level++;
-  startTime=new Date();}
+  if(introTimer==0) {
+    GAME.level++;
+  startTime=new Date();
+  GAME.transitionLevel=false;
+  CAR.x=100;
+  CAR.y=100;
+  CAR.distanceTraveled=0;
+  CAR.collateralDamage=0;
+  CAR.speed=0;
+  ART.linespeed=0;
+  GAME.obstacles=[];
+  winTime=180;
+
 }
-
-
+}
 
 var startTime=new Date();
 var timer="",tempTime=new Date();
@@ -35,11 +49,8 @@ function displayProgress(context) {
 
 var mineTimer=100;
 function setLevelSections(context) {
-  if(GAME.level==1) {
-    if(CAR.distanceTraveled>32000) {
-      GAME.obsType="car";
-    }
-    else if(CAR.distanceTraveled>20000) {
+
+    if(CAR.distanceTraveled>GAME.distanceGoal/2) {
       GAME.obsType="mine";
       if(mineTimer>0) {
         context.fillStyle='black';
@@ -48,18 +59,24 @@ function setLevelSections(context) {
         if(GAME.obstacles.length>0) {GAME.obstacles.pop();}
       }
     }
+    else{GAME.obsType="car";}
 
-  }
-}
-
-function setLevelConditions() {
 
 }
 
-function checkLevelConditions() {
+
+function checkLevelConditions(context) {
   if(CAR.distanceTraveled>GAME.distanceGoal) {
-    GAME.started=false;
+    if (winTime>0){
+      winTime--;
+    context.fillText("You win!", 240, 130);
+  }
+  else{
+    winTime=120;
+    introTimer=180;
+    GAME.transitionLevel=true;
     return;
+  }
   }
   if(CAR.collateralDamage>=50) {
     GAME.started=false;
@@ -73,10 +90,10 @@ function checkLevelConditions() {
 
 var levelEndTimer = 100;
 function runLevelEnd(context) {
-  if(CAR.collateralDamage<50) {
+  if(CAR.collateralDamage>=50) {
     context.fillStyle='white';
     context.font = "30px Arial";
-    context.fillText("You win!", 240, 130);
+    context.fillText("Game Over      Level " + GAME.level, 155, 200);
   }
   else if(CAR.distanceTraveled<GAME.distanceGoal) {
     context.fillStyle='white';
@@ -86,7 +103,7 @@ function runLevelEnd(context) {
   else {
     context.fillStyle='white';
     context.font = "30px Arial";
-    context.fillText("Game Over      Level " + GAME.level, 155, 200);
+    context.fillText("You Win!" + GAME.level, 155, 200);
   }
 }
 
@@ -96,12 +113,12 @@ function runGame() {
   context.font = "30px Arial";
   if (GAME.started) {
     if(GAME.transitionLevel) {
-
+      playIntro(context);
     }
     else if(GAME.level==0) {
       playIntro(context);
     }
-    else if(GAME.level==1) {
+    else if(GAME.level>=1) {
       GAME.time=new Date()-startTime;
       // 1 - Reposition the objects
       handleCarAnimation();
@@ -111,6 +128,7 @@ function runGame() {
       checkObstacleCollision();
 
       // 2 - Clear the CANVAS
+      if (winTime==180){
       context.clearRect(0, 0, 600, 300);
 
 
@@ -126,9 +144,9 @@ function runGame() {
       displayCollateralDamage(context);
       setLevelSections(context);
       displayProgress(context);
+}
 
-
-      checkLevelConditions();
+      checkLevelConditions(context);
     }
     else {
 

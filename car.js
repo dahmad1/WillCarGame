@@ -19,23 +19,28 @@ function InitializeCar(){
     speedY : 0,
     MAX_SPEED_Y : 2,
     distanceTraveled : 0,
-    collateralDamage : 0
+    collateralDamage : 0,
+    outOfTime : false,
+    destroyed : false
+
   }
 }
 
 function handleCarAnimation() {
 
   if (CONTROLS.car.forward) {
-    if (CONTROLS.fire.active) {
+    if (CONTROLS.car.nitro) {
       CAR.y -= 10;
+      nitro.play();
     }else
     {
       if(CAR.speedY>-CAR.MAX_SPEED_Y) {CAR.speedY -=  0.05;}
     }
   }
   else if (CONTROLS.car.backward) {
-    if (CONTROLS.fire.active) {
+    if (CONTROLS.car.nitro) {
       CAR.y += 10;
+      nitro.play();
     }else
     {
       if(CAR.speedY<CAR.MAX_SPEED_Y){CAR.speedY +=  0.05;}
@@ -49,8 +54,9 @@ function handleCarAnimation() {
 
 
   if (CONTROLS.car.right) {
-    if (CONTROLS.fire.active) {
+    if (CONTROLS.car.nitro) {
       CAR.x += 10;
+      nitro.play();
     }else
     {
       if(CAR.speedX<CAR.MAX_SPEED_X){CAR.speedX +=  0.05;}
@@ -58,8 +64,9 @@ function handleCarAnimation() {
     }
   }
   else if (CONTROLS.car.left) {
-    if (CONTROLS.fire.active) {
+    if (CONTROLS.car.nitro) {
       CAR.x -= 10;
+      nitro.play();
     }else
     {
       if(CAR.speedX>-CAR.MAX_SPEED_X){CAR.speedX -=  0.2;}
@@ -111,7 +118,7 @@ function renderCar(context) {
 
 function displayCollateralDamage(context) {
   context.fillStyle='white';
-  context.fillText("Collateral Damage: " +CAR.collateralDamage+"/50", 10, GAME.canvas.height-10);
+  context.fillText("Damage: " + CAR.collateralDamage+"/50", 10, GAME.canvas.height-10);
 }
 
 function setCollateralDamage() {

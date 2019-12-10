@@ -16,7 +16,7 @@ var ART = {
   lines : [],
   linespeed : 0,
   MAX_LINESPEED : 16
-}
+};
 
 var CAR = {
   initialized : false,

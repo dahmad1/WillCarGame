@@ -11,12 +11,7 @@ var CONTROLS = {
     left : false,
     brake: false,
     nitro : false
-  },
-  fire : {
-    active : false,
-    lastFireTime : 0
   }
-
 };
 
 document.addEventListener('keydown', function(event) {
@@ -34,7 +29,7 @@ document.addEventListener('keydown', function(event) {
       CONTROLS.car.right = true;
       break;
     case "z":
-      CONTROLS.fire.active = true;
+      CONTROLS.car.nitro = true;
       break;
     case " ":
       CONTROLS.car.brake = true;
@@ -60,7 +55,7 @@ document.addEventListener('keyup', function(event) {
       CONTROLS.car.right = false;
       break;
     case "z":
-      CONTROLS.fire.active = false;
+      CONTROLS.car.nitro = false;
       break;
     case " ":
       CONTROLS.car.brake = false;

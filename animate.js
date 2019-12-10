@@ -1,4 +1,14 @@
 var introTimer=300;
+
+var accel = new Audio("./sounds/accel.mp3");
+var nitro = new Audio("./sounds/nitro1.mp3");
+var honk = new Audio("./sounds/honk.mp3");
+var crash = new Audio("./sounds/crash.mp3");
+
+function timeout(){
+  setTimeOut(function(){accel.play(); timeout();}, 3000);
+}
+
 function playIntro(context) {
   context.fillStyle='grey';
   context.fillRect(0,0,GAME.canvas.width,GAME.canvas.height);
@@ -73,12 +83,15 @@ function checkLevelConditions() {
 
 var levelEndTimer = 100;
 function runLevelEnd(context) {
+
   if(CAR.collateralDamage<50) {
+    CAR.destroyed = true;
     context.fillStyle='white';
     context.font = "30px Arial";
     context.fillText("You win!", 240, 130);
   }
   else if(CAR.distanceTraveled<GAME.distanceGoal) {
+    CAR.outOfTime = true;
     context.fillStyle='white';
     context.font = "30px Arial";
     context.fillText("Out of time...", 170, 130);
@@ -89,6 +102,7 @@ function runLevelEnd(context) {
     context.fillText("Game Over      Level " + GAME.level, 155, 200);
   }
 }
+
 
 function runGame() {
   var canvas = document.getElementById('mainCanvas');
@@ -121,6 +135,9 @@ function runGame() {
       renderObstacles(context);
       renderCar(context);
 
+      // Play Audio
+      accel.play();
+
 
       displayTimer(context);
       displayCollateralDamage(context);
@@ -133,7 +150,6 @@ function runGame() {
     else {
 
     }
-
 
   } else {
     runLevelEnd(context);

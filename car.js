@@ -117,7 +117,7 @@ function displayCollateralDamage(context) {
 
 function displayCoins (context){
   context.fillStyle='white';
-  context.fillText("Coins: " + CAR.coinIncrease, 100, GAME.canvas.height-10);
+  context.fillText("Coins: " + CAR.coinIncrease, 450, 30);
 }
 
 

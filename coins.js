@@ -64,7 +64,7 @@ function renderCoins(context){
 
 function checkCoinCollision() {
     for(var i = 0; i < GAME.coins.length; i++) {
-      if(GAME.coins[i].type=="car") {
+      if(GAME.coins[i].type=="goldCoin") {
         if(GAME.coins[i].x-22.5<CAR.x+27.5
           &&GAME.coins[i].x+22.5>CAR.x-27.5
           &&GAME.coins[i].y-20<CAR.y+22.5

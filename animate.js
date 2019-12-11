@@ -30,7 +30,7 @@ function playIntro(context) {
   CAR.x=100;
   CAR.y=100;
   CAR.distanceTraveled=0;
-  CAR.collateralDamage=0;
+  CAR.Damage=0;
   CAR.speed=0;
   ART.linespeed=0;
   GAME.obstacles=[];

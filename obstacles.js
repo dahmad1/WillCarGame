@@ -59,27 +59,30 @@ function renderObstacles(context) {
 }
 
 function checkObstacleCollision() {
-  for (var i = 0; i < GAME.obstacles.length; i++) {
-    if (GAME.obstacles[i].type == "car") {
-      if (GAME.obstacles[i].x - 22.5 < CAR.x + 27.5 &&
-        GAME.obstacles[i].x + 22.5 > CAR.x - 27.5 &&
-        GAME.obstacles[i].y - 20 < CAR.y + 22.5 &&
-        GAME.obstacles[i].y + 20 > CAR.y - 22.5) {
-        CAR.collateralDamage += 10;
-        setCollateralDamage();
-        GAME.obstacles.splice(i, 1);
-        i--;
-      }
-    } else if (GAME.obstacles[i].type == "mine") {
-      if (GAME.obstacles[i].x - 17 < CAR.x + 27.5 &&
-        GAME.obstacles[i].x + 17 > CAR.x - 27.5 &&
-        GAME.obstacles[i].y - 8 < CAR.y + 22.5 &&
-        GAME.obstacles[i].y + 8 > CAR.y - 22.5) {
-        CAR.collateralDamage += 5;
-        setCollateralDamage();
-        GAME.obstacles.splice(i, 1);
-        i--;
-      }
+  for(var i = 0; i < GAME.obstacles.length; i++) {
+    if(GAME.obstacles[i].type=="car") {
+      if(GAME.obstacles[i].x-22.5<CAR.x+27.5
+        &&GAME.obstacles[i].x+22.5>CAR.x-27.5
+        &&GAME.obstacles[i].y-20<CAR.y+22.5
+        &&GAME.obstacles[i].y+20>CAR.y-22.5) {
+          CAR.Damage+=10;
+          crash.play();
+          setDamage();
+          GAME.obstacles.splice(i,1);
+          i--;
+        }
+    }
+    else if(GAME.obstacles[i].type=="mine") {
+      if(GAME.obstacles[i].x-17<CAR.x+27.5
+        &&GAME.obstacles[i].x+17>CAR.x-27.5
+        &&GAME.obstacles[i].y-8<CAR.y+22.5
+        &&GAME.obstacles[i].y+8>CAR.y-22.5) {
+          CAR.Damage+=15;
+          crash.play();
+          setDamage();
+          GAME.obstacles.splice(i,1);
+          i--;
+        }
     }
   }
 }

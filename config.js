@@ -15,7 +15,7 @@ var GAME = {
 var ART = {
   lines : [],
   linespeed : 0,
-  MAX_LINESPEED : 16
+  MAX_LINESPEED : 300
 }
 
 var CAR = {

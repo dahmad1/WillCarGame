@@ -1,5 +1,15 @@
 var introTimer=300;
+
+var accel = new Audio("./sounds/accel.mp3");
+var nitro = new Audio("./sounds/nitro1.mp3");
+var honk = new Audio("./sounds/honk.mp3");
+var crash = new Audio("./sounds/crash.mp3");
 var winTime = 180;
+
+function timeout(){
+  setTimeOut(function(){accel.play(); timeout();}, 3000);
+}
+
 function playIntro(context) {
   CAR.speedX=0;
   CAR.speedY=0;
@@ -77,8 +87,7 @@ function checkLevelConditions(context) {
     GAME.transitionLevel=true;
     return;
   }
-  }
-  if(CAR.collateralDamage>=50) {
+}  if(CAR.Damage>=50) {
     GAME.started=false;
     return;
   }
@@ -90,12 +99,12 @@ function checkLevelConditions(context) {
 
 var levelEndTimer = 100;
 function runLevelEnd(context) {
-  if(CAR.collateralDamage>=50) {
+  if(CAR.Damage<50 && CAR.distanceTraveled>=GAME.distanceGoal) {
     context.fillStyle='white';
     context.font = "30px Arial";
-    context.fillText("Game Over      Level " + GAME.level, 155, 200);
+    context.fillText("You Win!", 155, 200);
   }
-  else if(CAR.distanceTraveled<GAME.distanceGoal) {
+  else if(CAR.distanceTraveled<GAME.distanceGoal && CAR.Damage<50) {
     context.fillStyle='white';
     context.font = "30px Arial";
     context.fillText("Out of time...", 170, 130);
@@ -103,9 +112,10 @@ function runLevelEnd(context) {
   else {
     context.fillStyle='white';
     context.font = "30px Arial";
-    context.fillText("You Win!" + GAME.level, 155, 200);
+    context.fillText("Game Over      Level " + GAME.level, 155, 200);
   }
 }
+
 
 function runGame() {
   var canvas = document.getElementById('mainCanvas');
@@ -139,9 +149,12 @@ function runGame() {
       renderObstacles(context);
       renderCar(context);
 
+      // Play Audio
+      accel.play();
+
 
       displayTimer(context);
-      displayCollateralDamage(context);
+      displayDamage(context);
       setLevelSections(context);
       displayProgress(context);
 }
@@ -151,7 +164,6 @@ function runGame() {
     else {
 
     }
-
 
   } else {
     runLevelEnd(context);

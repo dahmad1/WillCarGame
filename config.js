@@ -8,7 +8,7 @@ var GAME = {
   obstacles : [],
   time : new Date(),
   transitionLevel : false,
-  distanceGoal : 40000,
+  distanceGoal : 20000,
   obsType : "car"
 };
 

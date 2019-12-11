@@ -19,7 +19,8 @@ function InitializeCar(){
     speedY : 0,
     MAX_SPEED_Y : 2,
     distanceTraveled : 0,
-    collateralDamage : 0
+    collateralDamage : 0,
+    coinIncrease : 0
   }
 }
 
@@ -113,6 +114,12 @@ function displayCollateralDamage(context) {
   context.fillStyle='white';
   context.fillText("Collateral Damage: " +CAR.collateralDamage+"/50", 10, GAME.canvas.height-10);
 }
+
+function displayCoins (context){
+  context.fillStyle='white';
+  context.fillText("Coins: " + CAR.coinIncrease, 100, GAME.canvas.height-10);
+}
+
 
 function setCollateralDamage() {
   CAR.MAX_SPEED_X=0.9*CAR.MAX_SPEED_X;

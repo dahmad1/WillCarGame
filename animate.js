@@ -107,8 +107,9 @@ function runGame() {
       handleCarAnimation();
       animateRoadLines();
       animateObstacles();
-
+      animateCoins();
       checkObstacleCollision();
+      checkCoinCollision();
 
       // 2 - Clear the CANVAS
       context.clearRect(0, 0, 600, 300);
@@ -120,8 +121,9 @@ function runGame() {
       renderRoadLines(context);
       renderObstacles(context);
       renderCar(context);
+      renderCoins(context);
 
-
+      displayCoins (context);
       displayTimer(context);
       displayCollateralDamage(context);
       setLevelSections(context);

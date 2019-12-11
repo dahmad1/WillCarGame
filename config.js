@@ -6,10 +6,12 @@ var GAME = {
   started : true,
   level : 0,
   obstacles : [],
+  coins : [],
   time : new Date(),
   transitionLevel : false,
   distanceGoal : 40000,
-  obsType : "car"
+  obsType : "car",
+  coinType : "goldCoin"
 };
 
 var ART = {

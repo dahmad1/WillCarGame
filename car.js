@@ -22,7 +22,6 @@ function InitializeCar() {
     distanceTraveled: 0,
     Damage: 0
   }
-
 }
 
 function handleCarAnimation() {
@@ -49,6 +48,7 @@ function handleCarAnimation() {
       CAR.speedY = 0;
     }
   }
+
 
   if (CONTROLS.car.right) {
     if (CONTROLS.car.nitro) {

@@ -163,7 +163,7 @@ function runGame() {
 
       displayCoins (context);
       displayTimer(context);
-      displayCollateralDamage(context);
+      displayDamage(context);
       setLevelSections(context);
       displayProgress(context);
 

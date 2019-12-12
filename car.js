@@ -12,15 +12,15 @@ function InitializeCar() {
       x: CAR.x,
       y: CAR.y,
     },
-    scale: 8,
-    speed: 3,
-    initialized: true,
-    //speedX: 0,
-    //MAX_SPEED_X: 3,
-    //speedY: 0,
-    //MAX_SPEED_Y: 4,
-    distanceTraveled: 0,
+    scale : 8,
+    speed : 3,
+    initialized : true,
+
+    distanceTraveled : 0,
+    collateralDamage : 0,
+    coinIncrease : 0,
     Damage: 0
+
   }
 }
 
@@ -107,6 +107,12 @@ function displayDamage(context) {
   context.fillStyle = 'white';
   context.fillText("Damage: " + CAR.Damage + "/50", 10, GAME.canvas.height - 10);
 }
+
+function displayCoins (context){
+  context.fillStyle='white';
+  context.fillText("Coins: " + CAR.coinIncrease, 450, 30);
+}
+
 
 function setDamage() {
   CAR.MAX_SPEED_X = 0.9 * CAR.MAX_SPEED_X;

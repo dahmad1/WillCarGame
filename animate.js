@@ -143,23 +143,29 @@ function runGame() {
       handleCarAnimation();
       animateRoadLines();
       animateObstacles();
-
+      animateCoins();
       checkObstacleCollision();
+      checkCoinCollision();
 
       // 2 - Clear the CANVAS
       if (winTime == 180) {
         context.clearRect(0, 0, 600, 300);
 
 
+      // 3 - Draw new items
+      renderRoad(context);
+      renderRoadLines(context);
+      renderObstacles(context);
+      renderCar(context);
+      renderCoins(context);
+      accel.play();
 
-        // 3 - Draw new items
-        renderRoad(context);
-        renderRoadLines(context);
-        renderObstacles(context);
-        renderCar(context);
 
-        // Play Audio
-        accel.play();
+      displayCoins (context);
+      displayTimer(context);
+      displayDamage(context);
+      setLevelSections(context);
+      displayProgress(context);
 
 
         displayTimer(context);

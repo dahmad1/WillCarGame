@@ -9,7 +9,7 @@ var GAME = {
   coins : [],
   time : new Date(),
   transitionLevel : false,
-  distanceGoal : 40000,
+  distanceGoal : 20000,
   obsType : "car",
   coinType : "goldCoin"
 };
@@ -17,7 +17,7 @@ var GAME = {
 var ART = {
   lines : [],
   linespeed : 0,
-  MAX_LINESPEED : 16
+  MAX_LINESPEED : 300
 }
 
 var CAR = {

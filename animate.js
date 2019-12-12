@@ -1,4 +1,4 @@
-var introTimer=75;
+var introTimer = 75;
 
 var accel = new Audio("./sounds/accel.mp3");
 var nitro = new Audio("./sounds/nitro1.mp3");

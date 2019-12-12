@@ -15,10 +15,10 @@ function InitializeCar() {
     scale: 8,
     speed: 3,
     initialized: true,
-    speedX: 0,
-    MAX_SPEED_X: 3,
-    speedY: 0,
-    MAX_SPEED_Y: 2,
+    //speedX: 0,
+    //MAX_SPEED_X: 3,
+    //speedY: 0,
+    //MAX_SPEED_Y: 4,
     distanceTraveled: 0,
     Damage: 0
   }
@@ -27,104 +27,51 @@ function InitializeCar() {
 function handleCarAnimation() {
 
   if (CONTROLS.car.up) {
-    CAR.y -= 2;
-
-    if (CAR.speedY > -CAR.MAX_SPEED_Y) {
-      CAR.speedY -= 0.05;
-    }
+    CAR.y -= 3;
   } else if (CONTROLS.car.down) {
-    CAR.y += 2;
-
-    if (CAR.speedY < CAR.MAX_SPEED_Y) {
-      CAR.speedY += 0.05;
-    }
-  } else {
+    CAR.y += 3;
+  }
+  /*else {
     if (CAR.speedY > 0) {
-      CAR.speedY -= 0.025;
+      CAR.speedY -= 1;
     } else if (CAR.speedY < 0) {
-      CAR.speedY += 0.025;
+      CAR.speedY += 1;
     }
-    if (Math.abs(CAR.speedY) < 0.1) {
-      CAR.speedY = 0;
-    }
-  }
+  }*/
 
-
-  if (CONTROLS.car.right) {
-    if (CONTROLS.car.nitro) {
-      CAR.x += 10;
-      nitro.play();
-    } else {
-      if (CAR.speedX < CAR.MAX_SPEED_X) {
-        CAR.speedX += 0.05;
-      }
-      if (ART.linespeed < ART.MAX_LINESPEED) {
-        ART.linespeed += 0.05;
-      }
-    }
-  } else if (CONTROLS.car.left) {
-    if (CONTROLS.car.nitro) {
-      CAR.x -= 10;
-      nitro.play();
-    } else {
-      if (CAR.speedX > -CAR.MAX_SPEED_X) {
-        CAR.speedX -= 0.2;
-      }
-      if (ART.linespeed > 0) {
-        ART.linespeed -= 0.01;
-      }
-    }
-  }
+  //Accelerate - moves the road not the car
   if (CONTROLS.car.accelerate) {
-    if (CAR.speedX < CAR.MAX_SPEED_X) {
-      CAR.speedX += 0.05;
-    }
     if (ART.linespeed < ART.MAX_LINESPEED) {
-      ART.linespeed += 0.05;
-    }
-  }
-
-  if (CONTROLS.car.right) {
-    CAR.x += 2;
-  } else if (CONTROLS.car.left) {
-    CAR.x -= 2;
-  } else if (CONTROLS.car.brake) {
-    if (CAR.speedX > 0) {
-      CAR.speedX -= 0.1;
-    } else if (CAR.speedX < 0) {
-      CAR.speedX += 0.1;
-    }
-
-    if (ART.linespeed > 0) {
-      ART.linespeed -= .1;
-
+      ART.linespeed += 0.1;
     }
   } else {
-    if (CAR.speedX > 0) {
-      CAR.speedX -= 0.05;
-    } else if (CAR.speedX < 0) {
-      CAR.speedX += 0.05;
-    }
     if (ART.linespeed > 0) {
-      ART.linespeed -= .01;
+      ART.linespeed -= 0.006;
+    }
+    if (ART.linespeed < 0) {
+      ART.linespeed = 0;
     }
   }
 
-
-  if (CAR.y <= 40 || CAR.y >= GAME.canvas.height - 40) {
-    CAR.speedX -= .1;
-    ART.linespeed -= .1;
-  }
-
-  if (ART.linespeed < 0) {
-    ART.linespeed = 0;
-  }
   if (ART.linespeed > ART.MAX_LINESPEED) {
     ART.linespeed = ART.MAX_LINESPEED;
   }
 
-  CAR.y += CAR.speedY;
-  CAR.distanceTraveled += ART.linespeed;
+  //Right, Left, Brake
+  if (CONTROLS.car.right) {
+    CAR.x += 3;
+  } else if (CONTROLS.car.left) {
+    CAR.x -= 3;
+  } else if (CONTROLS.car.brake) {
+    if (ART.linespeed > 0) {
+      ART.linespeed -= 0.2;
+    }
+  }
+
+  if (CAR.y <= 40 || CAR.y >= GAME.canvas.height - 40) {
+    ART.linespeed -= .05;
+  }
+
 
   if (CAR.y + 25 > GAME.canvas.height) {
     CAR.y = GAME.canvas.height - 25;
@@ -132,11 +79,13 @@ function handleCarAnimation() {
     CAR.y = 25
   }
 
-  if (CAR.x > GAME.canvas.width - 125) {
-    CAR.x = GAME.canvas.width - 125;
+  if (CAR.x > GAME.canvas.width - 75) {
+    CAR.x = GAME.canvas.width - 75;
   } else if (CAR.x < 50) {
     CAR.x = 50;
   }
+
+  CAR.distanceTraveled += ART.linespeed;
 }
 
 

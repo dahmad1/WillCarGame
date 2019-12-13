@@ -12,7 +12,8 @@ var CONTROLS = {
     brake: false,
     nitro : false,
     accelerate: false
-  }
+  },
+  shop: {mouseX :0, mouseY:0, click:false, nextLevel: false}
 };
 
 document.addEventListener('keydown', function(event) {
@@ -69,4 +70,11 @@ document.addEventListener('keyup', function(event) {
     default:
       break;
   }
+});
+
+
+document.addEventListener('click', function(event) {
+  CONTROLS.shop.mouseX = event.clientX -5;
+  CONTROLS.shop.mouseY = event.clientY -5;
+  CONTROLS.shop.click = true;
 });

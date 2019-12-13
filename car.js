@@ -1,5 +1,7 @@
 var redCar = new Image();
 redCar.src = "Images/spr_red_car.png";
+var blueCar = new Image();
+blueCar.src = "Images/spr_blue_car.png";
 
 function InitializeCar() {
   var canvas = document.getElementById('mainCanvas');
@@ -12,15 +14,16 @@ function InitializeCar() {
       x: CAR.x,
       y: CAR.y,
     },
-    scale : 8,
-    speed : 3,
-    initialized : true,
-
-    distanceTraveled : 0,
-    collateralDamage : 0,
-    coinIncrease : 0,
-    Damage: 0
-
+    scale: 8,
+    initialized: true,
+    //speedX: 0,
+    //MAX_SPEED_X: 3,
+    //speedY: 0,
+    //MAX_SPEED_Y: 4,
+    distanceTraveled: 0,
+    Damage: 0,
+    coinIncrease: 0,
+    hp: 50
   }
 }
 
@@ -105,7 +108,7 @@ function drawRotatedImage(context, image, x, y, width, height, angle) {
 
 function displayDamage(context) {
   context.fillStyle = 'white';
-  context.fillText("Damage: " + CAR.Damage + "/50", 10, GAME.canvas.height - 10);
+  context.fillText("Damage: " + CAR.Damage + "/" +CAR.hp, 10, GAME.canvas.height - 10);
 }
 
 function displayCoins (context){

@@ -1,4 +1,5 @@
-var introTimer = 75;
+var introTimer=75;
+var boughtBlue=false;
 
 var accel = new Audio("./sounds/accel.mp3");
 var nitro = new Audio("./sounds/nitro1.mp3");
@@ -14,8 +15,6 @@ function timeout() {
 }
 
 function playIntro(context) {
-  CAR.speedX = 0;
-  CAR.speedY = 0;
   context.fillStyle = 'grey';
   context.fillRect(0, 0, GAME.canvas.width, GAME.canvas.height);
   context.fillStyle = 'white';
@@ -34,9 +33,44 @@ function playIntro(context) {
     CAR.y = 100;
     CAR.distanceTraveled = 0;
     CAR.Damage = 0;
-    CAR.speed = 0;
     ART.linespeed = 0;
     GAME.obstacles = [];
+    GAME.distanceGoal+=5000;
+    winTime = 180;
+
+  }
+}
+
+function playShop(context) {
+  context.fillStyle = 'grey';
+  context.fillRect(0, 0, GAME.canvas.width, GAME.canvas.height);
+  context.fillStyle = 'white';
+  context.fillText("Shop", 255, 50);
+  context.font = "20px Arial";
+  context.fillText("Coins: "+ CAR.coinIncrease, 20, 20);
+  context.fillRect(220, 140, 90, 80);
+  context.drawImage(blueCar, 220, 140, 90, 80);
+  context.fillText("Costs 100 Coins", 205, 250);
+  if (CONTROLS.shop.click&&CAR.coinIncrease>=100&&!boughtBlue){
+    if (CONTROLS.shop.mouseX>180&&CONTROLS.shop.mouseY<270&&CONTROLS.shop.mouseY>140&&CONTROLS.shop.mouseY<220){
+    CAR.coinIncrease-=100;
+    boughtBlue=true;
+    redCar=blueCar;
+    CAR.hp=100;
+  }
+  }
+CONTROLS.shop.click=false;
+  if (CONTROLS.car.brake) {
+    GAME.level++;
+    startTime = new Date();
+    GAME.transitionLevel = false;
+    CAR.x = 100;
+    CAR.y = 100;
+    CAR.distanceTraveled = 0;
+    CAR.Damage = 0;
+    ART.linespeed = 0;
+    GAME.obstacles = [];
+    GAME.distanceGoal+=5000;
     winTime = 180;
 
   }
@@ -99,7 +133,7 @@ function checkLevelConditions(context) {
       return;
     }
   }
-  if (CAR.Damage >= 50) {
+  if (CAR.Damage >= CAR.hp) {
     GAME.started = false;
     return;
   }
@@ -134,7 +168,7 @@ function runGame() {
   context.font = "30px Arial";
   if (GAME.started) {
     if (GAME.transitionLevel) {
-      playIntro(context);
+      playShop(context);
     } else if (GAME.level == 0) {
       playIntro(context);
     } else if (GAME.level >= 1) {

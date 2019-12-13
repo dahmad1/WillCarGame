@@ -1,4 +1,4 @@
-var coin = new Image(); coin.src="Images/spr_coin.jpg";
+var coin = new Image(); coin.src="Images/spr_coin.png";
 
 function Coin(x,y,type) {
   this.x=x;
@@ -57,7 +57,7 @@ function renderCoins(context){
     for(var i = 0; i < GAME.coins.length; i++) {
       context.fillStyle='blue';
       if(GAME.coins[i].type=="goldCoin"){
-        context.drawImage(coin, GAME.coins[i].x-22.5,GAME.coins[i].y-20,45,40);
+        context.drawImage(coin, GAME.coins[i].x-22.5,GAME.coins[i].y-20,35,30);
     }
   }
 }
